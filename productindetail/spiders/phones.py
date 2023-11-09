@@ -13,7 +13,8 @@ class PhonesSpider(scrapy.Spider):
 
             yield{
             'Product name' : product.css('strong::text').get(),
-            'Brand' : product.css('strong::text').get().split()[0]
+            'Brand' : product.css('strong::text').get().split()[0],
+            'Image URL' : product.css('img ::attr(src)').get()
         }
 
        # next_page = response.css('[aria-label="Next"] ::attr(href)').get()
