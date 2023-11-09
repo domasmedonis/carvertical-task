@@ -7,18 +7,23 @@ class PhonesSpider(scrapy.Spider):
     start_urls = ["https://www.productindetail.com/phones"]
 
     def parse(self, response):
-        products = response.css('div.card')
 
-        for product in products:
-
-            yield{
-            'Product name' : product.css('strong::text').get(),
-            'Brand' : product.css('strong::text').get().split()[0],
-            'Image URL' : product.css('img ::attr(src)').get()
-        }
-
+        urls = response.css('div.card-body > a::attr(href)').extract()
+        for url in urls:
+            url = response.urljoin(url)
+            yield scrapy.Request(url=url, callback=self.parse_details)
+       
+       
        # next_page = response.css('[aria-label="Next"] ::attr(href)').get()
 
        # if next_page is not ('#'):
        #     next_page_url = 'https://www.productindetail.com' + next_page
        #     yield response.follow(next_page_url, callback=self.parse)
+
+    def parse_details(self, response):
+        yield {
+            'Product name' : response.css('div > h1 > strong::text').extract_first(),
+            'Brand' : response.css('div > h1 >strong::text').extract_first().split()[0],
+            'Operating system' : response.css('div > small ::text').extract()[3],
+            'Image URL' : response.css('div.card > div > div > div > img::attr(src)').extract_first()
+        }
