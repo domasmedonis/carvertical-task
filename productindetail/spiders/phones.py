@@ -25,5 +25,6 @@ class PhonesSpider(scrapy.Spider):
             'Product name' : response.css('div > h1 > strong::text').extract_first(),
             'Brand' : response.css('div > h1 >strong::text').extract_first().split()[0],
             'Operating system' : response.css('div > small ::text').extract()[3],
+            'Display technology' : response.css('[id="display"] > div > table > tbody > tr > td > small::text').extract()[1],
             'Image URL' : response.css('div.card > div > div > div > img::attr(src)').extract_first()
         }
