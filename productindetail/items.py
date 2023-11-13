@@ -6,7 +6,12 @@
 import scrapy
 
 
-class ProductindetailItem(scrapy.Item):
+class PhonesItem(scrapy.Item):
     # define the fields for your item here like:
     # name = scrapy.Field()
-    pass
+    name = scrapy.Field()
+    brand = scrapy.Field()
+    description = scrapy.Field()
+    operating_system = scrapy.Field()
+    display_technology = scrapy.Field()
+    image_url = scrapy.Field()

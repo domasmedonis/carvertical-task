@@ -91,3 +91,8 @@ ROBOTSTXT_OBEY = True
 REQUEST_FINGERPRINTER_IMPLEMENTATION = "2.7"
 TWISTED_REACTOR = "twisted.internet.asyncioreactor.AsyncioSelectorReactor"
 FEED_EXPORT_ENCODING = "utf-8"
+
+
+ITEM_PIPELINES = {
+  "productindetail.pipelines.MongoDBPipeline": 500
+} # The number indicates in which order to run this pipeline if there was more than one pipeline in the array.

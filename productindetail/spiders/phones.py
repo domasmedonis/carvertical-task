@@ -1,4 +1,5 @@
 import scrapy
+from ..items import PhonesItem
 
 
 class PhonesSpider(scrapy.Spider):
@@ -24,11 +25,13 @@ class PhonesSpider(scrapy.Spider):
 
         # Data 
     def parse_details(self, response):
-        yield {
-            'Product name' : response.css('h1.fs-2 > strong::text').extract_first(),
-            'Brand' : response.css('h1.fs-2 >strong::text').extract_first().split()[0],
-            'Description' : response.css('p.mb-0::text').extract_first(), # not sure if it's the right description
-            'Operating system' : response.css('div.div > small::text').extract()[3],
-            'Display technology' : response.css('[id="display"] td.border-end > small::text').extract()[1],
-            'Image URL' : response.css('div.row.mb-4 img.mb-3::attr(src)').extract_first()
-        }
+            item = PhonesItem()            
+
+            item['name'] = response.css('h1.fs-2 > strong::text').extract_first(),
+            item['brand'] = response.css('h1.fs-2 >strong::text').extract_first().split()[0],
+            item['description'] = response.css('p.mb-0::text').extract_first(), # not sure if it's the right description
+            item['operating_system'] = response.css('div.div > small::text').extract()[3],
+            item['display_technology'] = response.css('[id="display"] td.border-end > small::text').extract()[1],
+            item['image_url'] = response.css('div.row.mb-4 img.mb-3::attr(src)').extract_first()
+
+            yield item
