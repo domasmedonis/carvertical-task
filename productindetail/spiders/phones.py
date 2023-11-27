@@ -17,10 +17,10 @@ class PhonesSpider(scrapy.Spider):
 
 
        #Pagination
-        next_page = response.css('[aria-label="Next"] ::attr(href)').get()
-        if next_page is not ('#'):
-            next_page_url = 'https://www.productindetail.com' + next_page
-            yield response.follow(next_page_url, callback=self.parse)
+     #   next_page = response.css('[aria-label="Next"] ::attr(href)').get()
+      #  if next_page is not ('#'):
+       #     next_page_url = 'https://www.productindetail.com' + next_page
+       #     yield response.follow(next_page_url, callback=self.parse)
 
 
         # Data 

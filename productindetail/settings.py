@@ -93,6 +93,6 @@ TWISTED_REACTOR = "twisted.internet.asyncioreactor.AsyncioSelectorReactor"
 FEED_EXPORT_ENCODING = "utf-8"
 
 
-ITEM_PIPELINES = {
-  "productindetail.pipelines.MongoDBPipeline": 500
-} # The number indicates in which order to run this pipeline if there was more than one pipeline in the array.
+
+USER_AGENT='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36'
+ITEM_PIPELINES = {'productindetail.pipelines.MongoDBPipeline': 100}
